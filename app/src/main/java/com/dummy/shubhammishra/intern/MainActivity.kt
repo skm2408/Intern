@@ -12,12 +12,12 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
+    lateinit var progressDialog:ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
         setTitle("My Orders")
-        val progressDialog=ProgressDialog(this)
+        progressDialog=ProgressDialog(this)
         progressDialog.create()
         progressDialog.setMessage("Loading Your Order List...")
         progressDialog.show()
@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                progressDialog.dismiss()
                 val details = p0.getValue(DetailsArray::class.java)
                 val intent = Intent(this@MainActivity, SecondActivity::class.java)
                 intent.putExtra("Details", details)
