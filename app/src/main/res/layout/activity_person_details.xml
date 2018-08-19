@@ -38,7 +38,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/tv2Date"
+                android:id="@+id/tv2Stat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -172,7 +172,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginRight="10dp"
-                android:hint="Discount Price"
                 android:textSize="14sp" />
         </FrameLayout>
 
@@ -196,7 +195,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginRight="10dp"
-                android:hint="Total Price"
                 android:textSize="14sp" />
         </FrameLayout>
 

@@ -8,11 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.dummy.shubhammishra.intern.Classes.Details
+import com.dummy.shubhammishra.intern.Classes.OrderDetailsArray
 import com.dummy.shubhammishra.intern.PersonDetails
 import com.dummy.shubhammishra.intern.R
 import kotlinx.android.synthetic.main.recyclerview_activity_one.view.*
 
-class ActivityOneAdapter(var listInfo:ArrayList<Details>): RecyclerView.Adapter<ActivityOneAdapter.ActivityHolder>() {
+class ActivityOneAdapter(var listInfo:ArrayList<Details>,var orderInfo:OrderDetailsArray): RecyclerView.Adapter<ActivityOneAdapter.ActivityHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityHolder {
@@ -33,6 +34,7 @@ class ActivityOneAdapter(var listInfo:ArrayList<Details>): RecyclerView.Adapter<
         holder.itemView.setOnClickListener {
             val intent=Intent(holder.itemView.context,PersonDetails::class.java)
             intent.putExtra("Personal",listInfo[position])
+            intent.putExtra("PersonalDetails",orderInfo.listOrderDetails[position])
             holder.itemView.context.startActivity(intent)
         }
         Glide.with(holder.itemView.context).load(listInfo[position].photoId).into(holder.itemView.ivProfile)

@@ -23,6 +23,9 @@ class MainActivity : AppCompatActivity() {
         progressDialog.show()
         var listDetails = ArrayList<Details>()
         val databaseReference = FirebaseDatabase.getInstance().reference.child("Details")
+        /*
+        * TO Check if database exist in Firebase or not
+        * */
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
 
@@ -31,8 +34,10 @@ class MainActivity : AppCompatActivity() {
             override fun onDataChange(p0: DataSnapshot) {
                 val details = p0.getValue(DetailsArray::class.java)
                 if (details == null) {
+                    //To generate random 20 data and upload on Firebase
                     GetDetails(listDetails).execute()
                 } else {
+                    //if database on Firebase exist then directly fetch from it
                     startEvent()
                 }
             }
@@ -81,7 +86,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun doInBackground(vararg params: ArrayList<Details>): DetailsArray {
-            val databaseReference = FirebaseDatabase.getInstance().reference.child("Details").push()
+            /*
+            * Data is generated.Set of 20 data is generated and uploaded on Firebase using random Function
+            * */
             val date = arrayOf("Mon,Dec 04,11:45 AM", "Fri,Jan 11,10:35AM", "Tue,Nov 24,5:40PM", "Wed,Feb 6,01:30PM", "Thur,Oct 02,10:00AM", "Sat,June 06,6:30PM")
             val type = arrayOf("Electrician", "Plumber", "Painter", "Carpenter")
             val status = arrayOf("Pending", "Completed", "In Progress", "Cancelled")
@@ -89,7 +96,7 @@ class MainActivity : AppCompatActivity() {
             val profileId = arrayOf(R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4, R.drawable.image5)
             val r: Random = Random()
             for (i in 0..19) {
-                listDetails.add(Details(System.currentTimeMillis().toString(), date.get(r.nextInt(5)), 6600 + r.nextInt(99), type.get(r.nextInt(3)), name.get(r.nextInt(5)), status.get(r.nextInt(3)), r.nextInt(1000).toDouble(), profileId.get(r.nextInt(5))))
+                listDetails.add(Details(System.currentTimeMillis().toString(), date.get(r.nextInt(6)), 66000 + r.nextInt(999), type.get(r.nextInt(4)), name.get(r.nextInt(6)), status.get(r.nextInt(4)), r.nextInt(1000).toDouble(), profileId.get(r.nextInt(5))))
             }
 
             return DetailsArray(listDetails)
